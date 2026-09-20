@@ -295,7 +295,11 @@ func workBuddyRealmFromAccessToken(accessToken string) (workBuddyRealm, error) {
 	switch strings.ToLower(issuer.Hostname()) {
 	case "codebuddy.cn", "www.codebuddy.cn", "copilot.tencent.com":
 		return workBuddyRealmCN, nil
-	case "workbuddy.ai":
+	// www.codebuddy.ai is the international IAM host: it mints the Global
+	// tokens served by www.workbuddy.ai. Without this case those tokens are
+	// rejected here, which marks the auth model-unready and hides it from the
+	// scheduler even though chat itself would work.
+	case "workbuddy.ai", "www.codebuddy.ai":
 		return workBuddyRealmGlobal, nil
 	default:
 		return "", fmt.Errorf("JWT issuer host is unsupported")

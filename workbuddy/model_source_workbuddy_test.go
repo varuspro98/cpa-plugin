@@ -180,6 +180,7 @@ func TestWorkBuddyRealmFromAccessToken(t *testing.T) {
 		{issuer: "https://www.codebuddy.cn/auth/realms/copilot", want: workBuddyRealmCN},
 		{issuer: "https://copilot.tencent.com/realms/cli", want: workBuddyRealmCN},
 		{issuer: "https://workbuddy.ai/realms/cli", want: workBuddyRealmGlobal},
+		{issuer: "https://www.codebuddy.ai/auth/realms/copilot", want: workBuddyRealmGlobal},
 	}
 	for _, tt := range tests {
 		t.Run(tt.issuer, func(t *testing.T) {
